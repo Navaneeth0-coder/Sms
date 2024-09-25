@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Information System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 50%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin: 10px 0 5px;
+        }
+
+        input {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        #studentSection {
+            display: none;  /* Hide student section initially */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Login Section -->
+    <div class="container" id="loginSection">
+        <h1>Teacher Login</h1>
+
+        <!-- Login Form -->
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+            <button type="button" onclick="login()">Login</button>
+
+            <div class="error" id="errorMsg"></div>
+        </form>
+    </div>
+
+    <!-- Student Information Section (Hidden initially) -->
+    <div class="container" id="studentSection">
+        <h1>Student Information System</h1>
+
+        <!-- Form to add student -->
+        <form id="studentForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter student name" required>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" placeholder="Enter student age" required>
+
+            <label for="grade">Grade:</label>
+            <input type="text" id="grade" name="grade" placeholder="Enter student grade" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter student email" required>
+
+            <button type="button" onclick="addStudent()">Add Student</button>
+        </form>
+
+        <!-- Table to view students -->
+        <h2>Students List</h2>
+        <table id="studentsTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Grade</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dynamic rows will be added here by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Function to handle login
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Placeholder for actual username and password validation (Simulate login)
+            const validUsername = "teacher";
+            const validPassword = "password123";
+
+            if (username === validUsername && password === validPassword) {
+                // Hide login section and show student information section
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('studentSection').style.display = 'block';
+            } else {
+                // Show error message if login fails
+                document.getElementById('errorMsg').innerText = "Invalid username or password!";
+            }
+        }
+
+        // Function to add a student (placeholder for backend integration)
+        function addStudent() {
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const grade = document.getElementById('grade').value;
+            const email = document.getElementById('email').value;
+
+            if (name === "" || age === "" || grade === "" || email === "") {
+                alert("All fields are required!");
+                return;
+            }
+
+            // Create a new row in the students table
+            const table = document.getElementById('studentsTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+
+            // Insert cells
+            const cell1 = newRow.insertCell(0);
+            const cell2 = newRow.insertCell(1);
+            const cell3 = newRow.insertCell(2);
+            const cell4 = newRow.insertCell(3);
+            const cell5 = newRow.insertCell(4);
+
+            // Add text to the cells
+            cell1.innerHTML = table.rows.length;  // Auto-generate ID
+            cell2.innerHTML = name;
+            cell3.innerHTML = age;
+            cell4.innerHTML = grade;
+            cell5.innerHTML = email;
+
+            // Clear the form
+            document.getElementById('studentForm').reset();
+        }
+    </script>
+
+</body>
+</html>
